@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('拉取Git仓库代码') {
             steps {
+                checkout scmGit(branches: [[name: '${tag}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/stonebridgelin/jenkinstest.git']])
                 echo '拉取代码----success'
             }
         }
