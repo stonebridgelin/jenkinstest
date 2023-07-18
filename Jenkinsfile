@@ -50,6 +50,7 @@ pipeline {
 
         stage('通过Pushlish Over SSH通知测试服务器部署项目') {
             steps {
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'Jenkins_Test_On_Aliyun_server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: "deploy.sh $harborHost  $harborRepo  $JOB_NAME $tag 8080 9000", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 echo '通过Pushlish Over SSH通知测试服务器部署项目----success'
             }
         }
