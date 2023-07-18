@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment{
+        harborHost = '47.251.53.131:8090'
+        harborRepo = 'repo'
+        harborUser = 'admin'
+        harborPasswd = 'Harbor12345'
+    }
+
     // 存放所有任务的合集
     stages {
         stage('拉取Git仓库代码') {
@@ -34,8 +41,11 @@ pipeline {
         
         stage('将自定义镜像发布到Harbor') {
             steps {
-                echo '将自定义镜像发布到Harbor----success'
-            }
+                 sh '''docker login -u ${harborUser} -p ${harborPasswd} ${harborHost}
+                 docker tag ${JOB_NAME}:${tag} ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}
+                 docker push ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}''
+                 echo '${harborRepo}----success'
+             }
         }
 
         stage('通过Pushlish Over SSH通知测试服务器部署项目') {
