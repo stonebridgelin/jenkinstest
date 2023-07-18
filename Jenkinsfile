@@ -12,7 +12,7 @@ pipeline {
         
         stage('通过Maven构建项目') {
             steps {
-                sh '/usr/local/docker/jenkins_docker/data/apache-maven-3.6.3/bin/mvn clean package -DskipTests'
+                sh '/var/jenkins_home/apache-maven-3.6.3/bin/mvn clean package -DskipTests'
                 echo '构建项目----success'
             }
         }
