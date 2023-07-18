@@ -43,7 +43,7 @@ pipeline {
             steps {
                  sh '''docker login -u ${harborUser} -p ${harborPasswd} ${harborHost}
                  docker tag ${JOB_NAME}:${tag} ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}
-                 docker push ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}''
+                 docker push ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}'''
                  echo '${harborRepo}----success'
              }
         }
